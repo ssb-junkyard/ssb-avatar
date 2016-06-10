@@ -1,6 +1,12 @@
+'use strict'
 var pull = require('pull-stream')
 var cat = require('pull-cat')
 var mlib = require('ssb-msgs')
+
+function truncate(str, len) {
+  str = String(str)
+  return str.length < len ? str : str.substr(0, len-1) + '…'
+}
 
 module.exports = function getAvatar(sbot, source, dest, cb) {
   var name, image
