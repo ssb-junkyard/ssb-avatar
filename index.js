@@ -43,7 +43,7 @@ module.exports = function getAvatar(sbot, source, dest, cb) {
       }
     }, function (err) {
       if (err) return cb (err)
-      if (!name) name = truncate(id, 8)
+      if (!name) name = truncate(dest, 8)
       cb(null, {id: dest, name: name, image: image, from: source})
     })
   )
