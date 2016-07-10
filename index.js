@@ -28,6 +28,13 @@ module.exports = function getAvatar(sbot, source, dest, cb) {
         values: true,
         reverse: true
       }),
+      // Finally, get About info from other feeds.
+      sbot.links({
+        dest: dest,
+        rel: 'about',
+        values: true,
+        reverse: true
+      }),
     ]),
     pull.filter(function (msg) {
       return msg && msg.value.content && (!name || !image)
