@@ -37,9 +37,10 @@ module.exports = function getAvatar(sbot, source, dest, cb) {
       }),
     ]),
     pull.filter(function (msg) {
-      return msg && msg.value.content && (!name || !image)
+      return msg && msg.value.content
     }),
     pull.drain(function (msg) {
+      if (name && image) return false // end the streams early
       var c = msg.value.content
       if (!name) {
         name = c.name
@@ -49,7 +50,7 @@ module.exports = function getAvatar(sbot, source, dest, cb) {
         image = imgLink && imgLink.link
       }
     }, function (err) {
-      if (err) return cb (err)
+      if (err && err !== true) return cb (err)
       if (!name) name = truncate(dest, 8)
       cb(null, {id: dest, name: name, image: image, from: source})
     })
