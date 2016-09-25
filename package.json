@@ -10,7 +10,8 @@
   "dependencies": {
     "pull-cat": "^1.1.9",
     "pull-stream": "^3.4.3",
-    "ssb-msgs": "^5.2.0"
+    "ssb-msgs": "^5.2.0",
+    "ssb-ref": "^2.3.2"
   },
   "devDependencies": {},
   "scripts": {

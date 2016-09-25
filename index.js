@@ -2,6 +2,7 @@
 var pull = require('pull-stream')
 var cat = require('pull-cat')
 var mlib = require('ssb-msgs')
+var ref = require('ssb-ref')
 
 function truncate(str, len) {
   str = String(str)
@@ -28,13 +29,26 @@ module.exports = function getAvatar(sbot, source, dest, cb) {
         values: true,
         reverse: true
       }),
-      // Finally, get About info from other feeds.
+      // If that isn't enough, get About info from other feeds.
       sbot.links({
         dest: dest,
         rel: 'about',
         values: true,
         reverse: true
       }),
+      // Finally, get About info from the thing itself (if possible)
+      function fn(end, cb) {
+        if (end || fn.ended) return cb(true)
+        fn.ended = true
+        if (ref.isMsg(dest) && sbot.get) {
+          sbot.get(dest, function (err, value) {
+            if (err) cb(true)
+            else cb(null, {key: dest, value: value})
+          })
+        } else {
+          cb(true)
+        }
+      }
     ]),
     pull.filter(function (msg) {
       return msg && msg.value.content
