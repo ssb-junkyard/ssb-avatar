@@ -1,17 +1,17 @@
 {
   "name": "ssb-avatar",
   "description": "",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/dominictarr/ssb-avatar",
   "repository": {
     "type": "git",
     "url": "git://github.com/dominictarr/ssb-avatar.git"
   },
   "dependencies": {
-    "pull-cat": "^1.1.9",
-    "pull-stream": "^3.4.3",
+    "pull-cat": "^1.1.11",
+    "pull-stream": "^3.6.1",
     "ssb-msgs": "^5.2.0",
-    "ssb-ref": "^2.3.2"
+    "ssb-ref": "^2.7.1"
   },
   "devDependencies": {},
   "scripts": {
